@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Search from "./Search";
 import Table from "./Table";
@@ -41,7 +40,11 @@ function App() {
 		url => {
 			async function fetchAsync() {
 				let response = await fetch(
-					`${nasaUrl}?$where=lower(name) like '%25${search || ""}%25'`
+					`${nasaUrl}?$where=lower(name) like '%25${[...search]
+						.map(v =>
+							v === "!" || v === "#" || v === "$" ? "" : v.toLowerCase()
+						)
+						.join("") || ""}%25'`
 				);
 				let data = await response.json();
 				return data;
