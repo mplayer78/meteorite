@@ -36,7 +36,7 @@ const RowContents = ({ data, header }) => {
 			<td>{/\d\d\d\d/.exec(data.year)}</td>
 			<td>{data.nametype}</td>
 			<td>{data.recclass}</td>
-			<td>{data.mass}</td>
+			<td>{parseFloat(data.mass).toFixed(0) || "Unknown"}</td>
 			<td>{data.reclat}</td>
 			<td>{data.reclong}</td>
 		</>
