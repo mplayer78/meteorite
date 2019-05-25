@@ -18,7 +18,6 @@ const StyledRow = styled.tr`
 `;
 
 const RowContents = ({ data, header }) => {
-	console.log(data);
 	return header ? (
 		<>
 			<td>ID</td>
