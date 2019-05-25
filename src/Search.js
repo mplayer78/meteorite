@@ -29,7 +29,9 @@ const StyledButton = styled.button`
 `;
 
 const StyledInput = styled.input`
-	border-style: hidden;
+	border: none;
+	border-bottom: 2px solid #282c34;
+	outline: none;
 	::after {
 		content: "";
 		width: 100%;
