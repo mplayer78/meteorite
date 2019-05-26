@@ -60,7 +60,7 @@ function App() {
 		<div className="App">
 			<GlobalStyle />
 			<Page>
-				<HeaderDiv>Meteorite Explorer</HeaderDiv>
+				<HeaderDiv>Meteorite Explorer!</HeaderDiv>
 				<Search setSearch={setSearch} />
 				<Table data={data} />
 			</Page>
