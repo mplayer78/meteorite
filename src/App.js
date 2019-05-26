@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Search from "./Search";
 import Table from "./Table";
@@ -36,12 +35,15 @@ function App() {
 
 	const [data, setData] = useState([]);
 	const [search, setSearch] = useState("");
+	const formattedSearch = [...search]
+		.map(v => (v === "!" || v === "#" || v === "$" ? "" : v.toLowerCase()))
+		.join("");
 
 	useEffect(
 		url => {
 			async function fetchAsync() {
 				let response = await fetch(
-					`${nasaUrl}?$where=lower(name) like '%25${search || ""}%25'`
+					`${nasaUrl}?$where=lower(name) like '%25${formattedSearch || ""}%25'`
 				);
 				let data = await response.json();
 				return data;
@@ -58,7 +60,7 @@ function App() {
 		<div className="App">
 			<GlobalStyle />
 			<Page>
-				<HeaderDiv>Meteorite Explorer</HeaderDiv>
+				<HeaderDiv>Meteorite Explorer!</HeaderDiv>
 				<Search setSearch={setSearch} />
 				<Table data={data} />
 			</Page>

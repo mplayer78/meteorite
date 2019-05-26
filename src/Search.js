@@ -49,7 +49,6 @@ const Search = props => {
 		<SearchBox>
 			<form
 				onSubmit={e => {
-					console.log(e.target.value);
 					e.preventDefault();
 					props.setSearch(value);
 				}}
