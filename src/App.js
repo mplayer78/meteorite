@@ -35,16 +35,15 @@ function App() {
 
 	const [data, setData] = useState([]);
 	const [search, setSearch] = useState("");
+	const formattedSearch = [...search]
+		.map(v => (v === "!" || v === "#" || v === "$" ? "" : v.toLowerCase()))
+		.join("");
 
 	useEffect(
 		url => {
 			async function fetchAsync() {
 				let response = await fetch(
-					`${nasaUrl}?$where=lower(name) like '%25${[...search]
-						.map(v =>
-							v === "!" || v === "#" || v === "$" ? "" : v.toLowerCase()
-						)
-						.join("") || ""}%25'`
+					`${nasaUrl}?$where=lower(name) like '%25${formattedSearch || ""}%25'`
 				);
 				let data = await response.json();
 				return data;
