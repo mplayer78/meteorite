@@ -4,7 +4,7 @@ import Search from "./Search";
 import Table from "./Table";
 import styled, { createGlobalStyle } from "styled-components";
 
-const HeaderDiv = styled.table`
+const HeaderDiv = styled.div`
 	width: 100vw;
 
 	background: #4051b5;
@@ -53,7 +53,7 @@ function App() {
 				.then(data => setData(data))
 				.catch(reason => console.log(reason.message));
 		},
-		[search]
+		[formattedSearch]
 	);
 
 	return (
