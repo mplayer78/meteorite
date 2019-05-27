@@ -11,6 +11,7 @@ const StyledHeader = styled.tr`
 	background-color: #ffb563;
 	margin: 20px;
 	font-weight: 700;
+	padding: 20px;
 `;
 
 const StyledRow = styled.tr`
@@ -20,7 +21,7 @@ const StyledRow = styled.tr`
 const RowContents = ({ data, header }) => {
 	return header ? (
 		<>
-			<td>ID</td>
+			<td style={{ padding: "10px" }}>ID</td>
 			<td>Name</td>
 			<td>Year</td>
 			<td>Name Type</td>
@@ -44,6 +45,7 @@ const RowContents = ({ data, header }) => {
 };
 
 const Table = ({ data }) => {
+	console.log(data);
 	return (
 		<>
 			<StyledTable>

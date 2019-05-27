@@ -8,8 +8,9 @@ const SearchBox = styled.div`
 	margin: 10px;
 `;
 
-const StyledButton = styled.button`
-	background: hsl(231, 48%, 48%);
+export const StyledButton = styled.button`
+	background: ${props =>
+		props.label ? "hsl(231, 48%, 80%)" : "hsl(231, 48%, 48%)"};
 	border-radius: 2px;
 	display: inline-block;
 	cursor: pointer;
@@ -20,7 +21,8 @@ const StyledButton = styled.button`
 	border: 0px;
 	margin: 3px;
 	:hover {
-		background: hsl(231, 55%, 55%);
+		background: ${props =>
+			props.label ? "hsl(231, 48%, 80%)" : "hsl(231, 55%, 55%)"};
 	}
 	:active {
 		position: relative;

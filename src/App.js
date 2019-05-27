@@ -4,14 +4,16 @@ import "./App.css";
 import Search from "./Search";
 import Table from "./Table";
 import Pagination from "./Pagination";
+import Sort from "./Sort";
 
 const HeaderDiv = styled.div`
 	width: 100vw;
 
 	background: #4051b5;
 	color: white;
-	font-size: 1.4em;
-	padding: 10px;
+	font-size: 1.6em;
+	padding: 20px;
+	font-weight: 600;
 `;
 
 const Page = styled.div`
@@ -28,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     align-items: center;
+		font-family: 'Nunito Sans', sans-serif;
   }
 `;
 
@@ -80,6 +83,7 @@ function App() {
 			<Page>
 				<HeaderDiv>Meteorite Explorer!</HeaderDiv>
 				<Search setSearch={setSearch} />
+				<Sort setOrder={setOrder} />
 				<Pagination
 					count={pageCount}
 					perPage={perPage}
