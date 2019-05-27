@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const StyledTable = styled.table`
@@ -47,12 +47,17 @@ const Table = ({ data }) => {
 	return (
 		<>
 			<StyledTable>
-				<StyledHeader>
-					<RowContents data={data[0]} header key="header" />
-				</StyledHeader>
-				{!data
-					? null
-					: data.map((val, ind) =>
+				<tbody>
+					<StyledHeader>
+						<RowContents data={data[0]} header key="header" />
+					</StyledHeader>
+
+					{!data ? (
+						<StyledRow>
+							<RowContents />
+						</StyledRow>
+					) : (
+						data.map((val, ind) =>
 							ind % 2 ? (
 								<StyledRow key={val.id}>
 									<RowContents data={val} />
@@ -62,7 +67,9 @@ const Table = ({ data }) => {
 									<RowContents data={val} />
 								</StyledRow>
 							)
-					  )}
+						)
+					)}
+				</tbody>
 			</StyledTable>
 		</>
 	);
