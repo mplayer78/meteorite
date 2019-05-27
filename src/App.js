@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import styled, { createGlobalStyle } from "styled-components";
 import "./App.css";
 import Search from "./Search";
 import Table from "./Table";
-import styled, { createGlobalStyle } from "styled-components";
+import Pagination from "./Pagination";
 
 const HeaderDiv = styled.div`
 	width: 100vw;
@@ -33,8 +34,13 @@ const GlobalStyle = createGlobalStyle`
 function App() {
 	const nasaUrl = "https://data.nasa.gov/resource/gh4g-9sfh.json";
 
-	const [data, setData] = useState([]);
+	const [dataList, setDataList] = useState([]);
 	const [search, setSearch] = useState("");
+	const [pageCount, setPageCount] = useState({});
+	const [perPage, setPerPage] = useState(1000);
+	const [pageOffset, setPageOffset] = useState(0);
+	const [order, setOrder] = useState(":id");
+
 	const formattedSearch = [...search]
 		.map(v => (v === "!" || v === "#" || v === "$" ? "" : v.toLowerCase()))
 		.join("");
@@ -42,18 +48,30 @@ function App() {
 	useEffect(
 		url => {
 			async function fetchAsync() {
+				let data = {};
 				let response = await fetch(
-					`${nasaUrl}?$where=lower(name) like '%25${formattedSearch || ""}%25'`
+					`${nasaUrl}?$where=lower(name) like '%25${formattedSearch ||
+						""}%25'&$limit=${perPage}&$offset=${pageOffset}&$order=${order}`
 				);
-				let data = await response.json();
+				data.list = await response.json();
+				let dataCount = await fetch(
+					`${nasaUrl}?$where=lower(name) like '%25${formattedSearch ||
+						""}%25'&$select=count(name)`
+				);
+				data.dataCount = await dataCount.json();
+				console.log(data.dataCount[0]);
 				return data;
 			}
 
 			fetchAsync()
-				.then(data => setData(data))
+				.then(data => setPageCount(data.dataCount[0]))
+				.catch(reason => console.log(reason.message));
+
+			fetchAsync()
+				.then(data => setDataList(data.list))
 				.catch(reason => console.log(reason.message));
 		},
-		[formattedSearch]
+		[formattedSearch, pageOffset, perPage, order]
 	);
 
 	return (
@@ -62,7 +80,12 @@ function App() {
 			<Page>
 				<HeaderDiv>Meteorite Explorer!</HeaderDiv>
 				<Search setSearch={setSearch} />
-				<Table data={data} />
+				<Pagination
+					count={pageCount}
+					perPage={perPage}
+					setPageOffset={setPageOffset}
+				/>
+				<Table data={dataList} />
 			</Page>
 		</div>
 	);
