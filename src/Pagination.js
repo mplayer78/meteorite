@@ -15,7 +15,7 @@ const Pagination = ({ count, perPage, setPageOffset }) => {
 	return (
 		<div style={{ maxWidth: 800, padding: "10px" }}>
 			{pagesArray.map(v => (
-				<a id={v} key={v} onClick={e => setPageOffset(v * perPage)}>
+				<a href="#" id={v} key={v} onClick={e => setPageOffset(v * perPage)}>
 					<PageSpan>{v} | </PageSpan>
 				</a>
 			))}

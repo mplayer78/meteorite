@@ -14,11 +14,19 @@ const HeaderDiv = styled.div`
 	font-size: 1.6em;
 	padding: 20px;
 	font-weight: 600;
+	margin-bottom: 20px;
 `;
 
 const Page = styled.div`
 	width: 100vw;
 	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+const PageInner = styled.div`
+	max-width: 1000px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -82,14 +90,16 @@ function App() {
 			<GlobalStyle />
 			<Page>
 				<HeaderDiv>Meteorite Explorer!</HeaderDiv>
-				<Search setSearch={setSearch} />
-				<Sort setOrder={setOrder} />
-				<Pagination
-					count={pageCount}
-					perPage={perPage}
-					setPageOffset={setPageOffset}
-				/>
-				<Table data={dataList} />
+				<PageInner>
+					<Search setSearch={setSearch} />
+					<Sort setOrder={setOrder} />
+					<Pagination
+						count={pageCount}
+						perPage={perPage}
+						setPageOffset={setPageOffset}
+					/>
+					<Table data={dataList} />
+				</PageInner>
 			</Page>
 		</div>
 	);

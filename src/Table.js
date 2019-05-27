@@ -4,7 +4,7 @@ import styled from "styled-components";
 const StyledTable = styled.table`
 	border-color: white;
 	background-color: white;
-	max-width: 1000px;
+	width: 100%;
 `;
 
 const StyledHeader = styled.tr`
