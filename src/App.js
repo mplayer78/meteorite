@@ -4,7 +4,7 @@ import Search from "./Search";
 import Table from "./Table";
 import styled, { createGlobalStyle } from "styled-components";
 
-const HeaderDiv = styled.div`
+const HeaderDiv = styled.table`
 	width: 100vw;
 
 	background: #4051b5;

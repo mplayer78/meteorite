@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const StyledTable = styled.div`
+const StyledTable = styled.table`
 	border-color: white;
 	background-color: white;
 	max-width: 1000px;
@@ -48,23 +48,21 @@ const Table = ({ data }) => {
 		<>
 			<StyledTable>
 				<StyledHeader>
-					<RowContents data={data[0]} header />
+					<RowContents data={data[0]} header key="header" />
 				</StyledHeader>
-				{!data ? (
-					<h1 style={{ color: "white" }}>Loading...</h1>
-				) : (
-					data.map((val, ind) =>
-						ind % 2 ? (
-							<StyledRow>
-								<RowContents data={val} />
-							</StyledRow>
-						) : (
-							<StyledRow greyColor>
-								<RowContents data={val} />
-							</StyledRow>
-						)
-					)
-				)}
+				{!data
+					? null
+					: data.map((val, ind) =>
+							ind % 2 ? (
+								<StyledRow key={val.id}>
+									<RowContents data={val} />
+								</StyledRow>
+							) : (
+								<StyledRow greyColor key={val.id}>
+									<RowContents data={val} />
+								</StyledRow>
+							)
+					  )}
 			</StyledTable>
 		</>
 	);
